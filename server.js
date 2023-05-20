@@ -2,6 +2,8 @@
 import express from "express"
 import cors from "cors"
 import { config } from "dotenv"
+// Importing Routes
+import ResturantRoutes from "./Routes/resturant.routes.js"
 // Importing Database
 import mongoClient from "./Database/Connect.js"
 
@@ -15,10 +17,16 @@ const server = express()
 server.use(cors())
 server.use(express.json())
 
+// Enabling Routes
+server.use('/resturant', ResturantRoutes)
 
 // Enabling Server For Communication
 const port = process.env.PORT || 4000
 server.listen(port, () => {
-    console.info(`Server Is Runing On Port: ${port}`)
-    mongoClient()
+    try {
+        console.info(`Server Is Runing On Port: ${port}`)
+        mongoClient()
+    } catch (error) {
+        console.log(error?.message)
+    }
 })
