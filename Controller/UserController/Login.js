@@ -9,7 +9,7 @@ const LoginController = async (req, res) => {
             res.status(200).send({
                 message: "SuccessFully Login!", data: {
                     user,
-                    token: jwt.sign(user._id, process.env.JWT_SECRET_KEY)
+                    token: jwt.sign(user._id?.toString(), process.env.JWT_SECRET_KEY)
                 }
             })
         } else {
