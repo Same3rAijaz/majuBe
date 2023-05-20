@@ -4,6 +4,7 @@ import { model, Schema } from "mongoose";
 // Defining User InfraStructure
 const UserModal = new Schema({
     name: { type: String },
+    email: { type: String },
     gender: { type: Number },
     phone: { type: Number },
     password: { type: String },

@@ -7,6 +7,7 @@ import ResturantRoutes from "./Routes/resturant.routes.js"
 import RatingRouter from "./Routes/rating.routes.js"
 import OrderRouter from "./Routes/order.routes.js"
 import ReservationRouter from "./Routes/reservation.routes.js"
+import UserRouter from "./Routes/user.routes.js"
 // Importing Database
 import mongoClient from "./Database/Connect.js"
 
@@ -25,6 +26,7 @@ server.use('/resturant', ResturantRoutes)
 server.use('/rating', RatingRouter)
 server.use('/order', OrderRouter)
 server.use('/reservation', ReservationRouter)
+server.use('/user', UserRouter)
 
 
 // Enabling Server For Communication
