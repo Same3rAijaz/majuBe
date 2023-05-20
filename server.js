@@ -6,6 +6,7 @@ import { config } from "dotenv"
 import ResturantRoutes from "./Routes/resturant.routes.js"
 import RatingRouter from "./Routes/rating.routes.js"
 import OrderRouter from "./Routes/order.routes.js"
+import ReservationRouter from "./Routes/reservation.routes.js"
 // Importing Database
 import mongoClient from "./Database/Connect.js"
 
@@ -23,6 +24,7 @@ server.use(express.json())
 server.use('/resturant', ResturantRoutes)
 server.use('/rating', RatingRouter)
 server.use('/order', OrderRouter)
+server.use('/reservation', ReservationRouter)
 
 
 // Enabling Server For Communication

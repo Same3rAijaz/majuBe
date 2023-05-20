@@ -6,7 +6,7 @@ const router = Router()
 
 // Decalearing Routes
 router.post('/create', Resturant.createResturant)
-router.get('/get', Resturant.getAllResturant)
+router.get('/', Resturant.getAllResturant)
 
 
 export default router;
