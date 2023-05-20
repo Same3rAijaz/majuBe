@@ -15,7 +15,21 @@ const GetAllResturants = async (req, res) => {
             resturants['rating'] = Math.ceil(Number(rating) / Number(total_rating)) ?? rating
             return res.status(200).send({ message: "All Resturants!", data: resturants })
         } else {
-            const resturants = await ResturantModal.find()
+            const filters = () => {
+                let obj = {}
+                if (req?.query?.name) {
+                    obj['name'] = req?.query?.name
+                }
+                if (req?.query?.price_range) {
+                    obj['price'] = req?.query?.price_range
+                }
+                if (req?.query?.category) {
+                    obj['category'] = req?.query?.category
+                }
+                return obj
+            }
+            const filter = filters()
+            const resturants = (req?.query?.name || req?.query?.price_range || req?.query?.category) ? await ResturantModal.find(filter?.name ? { ...filter, name: { $regex: '.*' + filter?.name + '.*' } } : { ...filter }) : await ResturantModal.find()
             for (let index = 0; index < resturants.length; index++) {
                 let element = resturants[index];
                 const ratings = await RatingModal.find({ resturant_id: element?._id })
@@ -25,11 +39,10 @@ const GetAllResturants = async (req, res) => {
                     return rating += obb.rating
                 })
                 resturants[index]['rating'] = Math.ceil(Number(rating) / Number(total_rating)) ?? rating
-                return res.status(200).send({ message: "All Resturants!", data: resturants })
             }
+            return res.status(200).send({ message: "All Resturants!", data: resturants })
         }
     } catch (error) {
-        console.log(error?.message)
         return res.status(400).send({ message: "Bad Request!" })
     }
 }
